@@ -1,12 +1,12 @@
-# Roustabout: variant visualization and analysis
+# o8: genetic changes we can believe in
 
-Roustabout handles the hard work of organizing and visualizing genetic variants,
+o8 handles the hard work of organizing and visualizing genetic variants,
 providing a web-based platform to interactively explore and analyze human
 variation data. It easily interoperates with analysis frameworks like
 [Galaxy][7] and [GenomeSpace][8] to supplement existing tools
 with a reactive, intuitive way to identify biologically relevant changes.
 
-Roustabout is easy to setup and run on your own infrastructure, and a
+o8 is easy to setup and run on your own infrastructure, and a
 [demonstration server][2] is available to explore the system capabilities.
 It is an open source, freely available platform built on top of existing
 software:
