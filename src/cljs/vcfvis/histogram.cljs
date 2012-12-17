@@ -98,6 +98,7 @@
                      [:div#histograms
 
                       [:div.labels
+                       [:span.metric-label (:id metric)]
                        (for [[vcf idx] (map vector vcfs (range))]
                          [:span.label {:style {:top (str (* idx (+ hist-height inter-hist-margin)) "px")}}
                           (vcf :file-url)])]
