@@ -13,9 +13,6 @@
                 (string/split #"/" 4)
                 last)]
     (doseq [list-item (dom/children (dom/select "#top-navbar"))]
-      (pp (-> (dom/children list-item)
-              first
-              (dom/attr :href)))
       (if (= (str "/" loc)
              (-> (dom/children list-item)
                  first
