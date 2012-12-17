@@ -1,4 +1,4 @@
-(ns vcfvis.scratch
+(ns o8.scratch
   (:use [bcbio.variation.api.metrics :only [plot-ready-metrics get-raw-metrics]]
         [bcbio.variation.api.file :only [get-files]]
         [bcbio.variation.api.run :only [do-analysis]]

@@ -1,5 +1,5 @@
 ;; Generally useful user interface functionality
-(ns aahru.ui
+(ns o8.ui
   (:use-macros [c2.util :only [pp]])
   (:require [clojure.string :as string]
             [c2.dom :as dom]

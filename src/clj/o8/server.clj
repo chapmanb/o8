@@ -1,6 +1,6 @@
-(ns vcfvis.server
+(ns o8.server
   (:use [compojure.core]
-        [vcfvis.login :only [bio-remote-workflow bio-credential-fn]]
+        [o8.login :only [bio-remote-workflow bio-credential-fn]]
         [ring.adapter.jetty :only [run-jetty]]
         [ring.middleware file-info session anti-forgery
          keyword-params multipart-params params]
@@ -10,10 +10,10 @@
             [compojure.route :as route]
             [cemerick.friend :as friend]
             [cemerick.shoreleave.rpc :as rpc]
-            [vcfvis.api :as api]
-            [vcfvis.dataset :as dataset]
-            [vcfvis.pages :as pages]
-            [vcfvis.xprize :as xprize]))
+            [o8.api :as api]
+            [o8.dataset :as dataset]
+            [o8.pages :as pages]
+            [o8.xprize :as xprize]))
 
 (defroutes main-routes
   (GET "/login" req (pages/add-std-info "public/login.html"))

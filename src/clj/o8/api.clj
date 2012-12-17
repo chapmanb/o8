@@ -1,4 +1,4 @@
-(ns vcfvis.api
+(ns o8.api
   "Expose variant data retrieval and processing to client calls."
   (:use compojure.core
         [cemerick.friend :only [current-authentication]]
@@ -12,7 +12,7 @@
             [bcbio.variation.api.file :as bc-file]
             [bcbio.variation.api.metrics :as bc-metrics]
             [bcbio.variation.remote.core :as remote]
-            [vcfvis.dataset :as dataset]))
+            [o8.dataset :as dataset]))
 
 (defremote ^{:remote-name :meta/username} get-username []
   (-> (current-authentication)

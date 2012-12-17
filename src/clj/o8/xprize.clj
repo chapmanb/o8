@@ -1,4 +1,4 @@
-(ns vcfvis.xprize
+(ns o8.xprize
   "Provide X Prize specific scoring and comparisons."
   (:use [clojure.java.io]
         [compojure.core]
@@ -12,8 +12,8 @@
             [net.cgrand.enlive-html :as html]
             [bcbio.variation.api.run :as run]
             [bcbio.variation.web.db :as db]
-            [vcfvis.api :as api]
-            [vcfvis.pages :as pages]))
+            [o8.api :as api]
+            [o8.pages :as pages]))
 
 (defn- get-work-info
   [run-id]
@@ -73,7 +73,7 @@
        [:div {:class "progress"}
         [:div {:id "scoring-progress"
                :class "bar" :style "width: 0%"}]]
-        [:script (format "aahru.xprize.score.update_run_status('%s');" run-id)]
+        [:script (format "o8.xprize.score.update_run_status('%s');" run-id)]
        (slurp score-html-file)]))))
 
 (defn- put-results-in-db
@@ -121,7 +121,7 @@
                          (-> (java.text.SimpleDateFormat. "dd MMM yyyy HH:mm" )
                              (.format (:created x))))]])
              (db/get-analyses username :scoring (:db @web-config)))]
-       [:script "aahru.xprize.analyses.display_analyses()"]]))))
+       [:script "o8.xprize.analyses.display_analyses()"]]))))
 
 (defroutes xprize-routes
   (GET "/" req (pages/add-std-info "public/xprize.html"))

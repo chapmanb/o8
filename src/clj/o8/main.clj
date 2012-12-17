@@ -1,6 +1,6 @@
-(ns vcfvis.main
+(ns o8.main
   (:gen-class)
-  (:use [vcfvis.server :only [start!]]
+  (:use [o8.server :only [start!]]
         [bcbio.variation.api.shared :only [set-config-from-file!]]
         [clojure.tools.cli :only [cli]]))
 

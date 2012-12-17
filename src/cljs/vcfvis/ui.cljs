@@ -2,10 +2,10 @@
   (:use-macros [c2.util :only [pp p bind!]])
   (:require [vcfvis.core :as core]
             [c2.dom :as dom]
-            [aahru.ui]))
+            [o8.ui]))
 
-(def set-user aahru.ui/set-user)
-(def set-navigation aahru.ui/set-navigation)
+(def set-user o8.ui/set-user)
+(def set-navigation o8.ui/set-navigation)
 
 ;;;;;;;;;;;;;;;;;;;
 ;;Histogram params

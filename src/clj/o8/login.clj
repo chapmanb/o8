@@ -1,4 +1,4 @@
-(ns vcfvis.login
+(ns o8.login
   "Handle login credentials for multiple remote providers."
   (:use [bcbio.variation.api.file :only [get-client]])
   (:require [cemerick.friend :as friend]

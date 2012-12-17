@@ -25,7 +25,7 @@
 
   :jvm-opts ["-Dorg.eclipse.jetty.util.log.class=org.eclipse.jetty.util.log.StdErrLog"
              "-Xmx2g"]
-  :main vcfvis.main
+  :main o8.main
   
   :profiles {:dev {:dependencies [[midje "1.4.0"]
                                   [clj-http "0.5.0"]]}
@@ -39,12 +39,12 @@
   :plugins [[lein-cljsbuild "0.2.7"]
             [lein-ring "0.7.5"]]
 
-  :ring {:handler vcfvis.server/app
-         :init vcfvis.main/devel-set-config!}
+  :ring {:handler o8.server/app
+         :init o8.main/devel-set-config!}
 
   :cljsbuild {:builds
               [{:source-path "src/cljs/vcfvis"
-                :compiler {:output-to "public/vcf.js"
+                :compiler {:output-to "public/vcfvis.js"
 
                            ;; :optimizations :advanced
                            ;; :pretty-print false
@@ -54,8 +54,8 @@
                            :externs ["externs/jquery.js"
                                      "vendor/externs.js"
                                      "resources/closure-js/externs"]}}
-               {:source-path "src/cljs/aahru"
-                :compiler {:output-to "public/aahru.js"
+               {:source-path "src/cljs/o8"
+                :compiler {:output-to "public/o8.js"
                            :optimizations :whitespace
                            :pretty-print true
                            :externs ["externs/jquery.js"]}}]})

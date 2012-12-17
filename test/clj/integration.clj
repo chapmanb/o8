@@ -1,5 +1,5 @@
 (ns test.integration
-  (:use [vcfvis.server :only [app]]
+  (:use [o8.server :only [app]]
         [ring.mock.request :only [request body]]
         [ring.adapter.jetty :only [run-jetty]]
         midje.sweet)

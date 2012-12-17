@@ -1,4 +1,4 @@
-(ns vcfvis.dataset
+(ns o8.dataset
   "Provide retrieval of local file datasets, for display and upload to other services."
   (:import [java.net InetAddress URL]
            [java.util UUID])

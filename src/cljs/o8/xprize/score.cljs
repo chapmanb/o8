@@ -1,6 +1,6 @@
 ;;Interactive functionality for X prize scoring based web pages.
 
-(ns aahru.xprize.score
+(ns o8.xprize.score
   (:use-macros [c2.util :only [pp]])
   (:require [clojure.string :as string]
             [c2.dom :as dom]

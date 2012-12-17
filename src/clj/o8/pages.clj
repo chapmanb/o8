@@ -1,4 +1,4 @@
-(ns vcfvis.pages
+(ns o8.pages
   "Processing and preparation of display and input pages."
   (:use [clojure.java.io]
         [bcbio.variation.api.shared :only [web-config]])

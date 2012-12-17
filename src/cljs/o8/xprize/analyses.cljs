@@ -1,6 +1,6 @@
 ;; Interactive functionality for display of older analyses.
 
-(ns aahru.xprize.analyses
+(ns o8.xprize.analyses
   (:use-macros [c2.util :only [pp]])
   (:require [c2.dom :as dom]
             [c2.event :as event]
