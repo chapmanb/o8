@@ -13,8 +13,7 @@ software:
 
 - [GATK][9]: The Genome Analysis Toolkit from the Broad Institute
 - [gemini][10]: a framework for mining genome variation, from the Quinlan lab
-- [Variant Effect Predictor][11]: predicts functional
-  consequences of variants, from the Ensembl team
+- [snpEff][11]: predicts functional consequences of variants, from McGill University
 - [bcbio.variation][12]: a toolkit to compare and consolidate variation calls from
   multiple sources, developed at Harvard School of Public Health
 
@@ -80,7 +79,7 @@ Copyright (c) 2012 Keming Labs, LLC
 [8]: http://www.genomespace.org/
 [9]: http://www.broadinstitute.org/gatk/
 [10]: https://github.com/arq5x/gemini
-[11]: http://www.ensembl.org/info/docs/variation/vep/index.html
+[11]: http://snpeff.sourceforge.net/
 [12]: http://cloudbiolinux.org
 
 [l1]: http://www.opensource.org/licenses/mit-license.html

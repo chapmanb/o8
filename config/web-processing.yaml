@@ -5,7 +5,8 @@ ref:
   - sample: NA00001
     description: Test Genome
     genome: biodata:/GRCh37/seq/GRCh37.fa
-    genome-alts: []
+    genome-alts: ["biodata:/hg19/seq/hg19.fa"]
+    effects: GRCh37.68
     variants: test/data/phasing-reference.vcf
     intervals: test/data/phasing-reference-regions.bed
     default-compare: test/data/phasing-contestant.vcf
@@ -29,4 +30,3 @@ dir:
 
 program:
   gemini: gemini
-  vep: ~/install/variant_effect_predictor
