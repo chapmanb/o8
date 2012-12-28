@@ -21,6 +21,9 @@
                  [hiccup "1.0.1"]
                  [enlive "1.0.1" :exclusions [org.clojure/clojure]]
 
+                 [clj-http "0.6.3"]
+                 [org.clojure/data.zip "0.1.1"]
+
                  [bcbio.variation "0.0.6-SNAPSHOT"]]
 
   :jvm-opts ["-Dorg.eclipse.jetty.util.log.class=org.eclipse.jetty.util.log.StdErrLog"
@@ -35,6 +38,7 @@
 
   :min-lein-version "2.0.0"
   :source-paths ["src/clj" "src/cljs"]
+  :test-paths ["test/clj"]
 
   :plugins [[lein-cljsbuild "0.2.7"]
             [lein-ring "0.7.5"]]

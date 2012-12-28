@@ -3,3 +3,4 @@ target/
 .sass-cache
 test/data/*-sorted.bed
 test/data/*vcf.idx
+file.dot

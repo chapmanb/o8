@@ -1,9 +1,11 @@
-(ns test.integration
+(ns o8.integration_test
   (:use [o8.server :only [app]]
-        [ring.mock.request :only [request body]]
+        ;;[ring.mock.request :only [request body]]
         [ring.adapter.jetty :only [run-jetty]]
         midje.sweet)
   (:require [clj-http.client :as http]))
+
+(comment
 
 ;;Tests against live server
 (def test-port 9999)
@@ -35,3 +37,4 @@
    (prn res)
    res => map?
    ))
+)
