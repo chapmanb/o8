@@ -13,6 +13,7 @@
             [c2.dom :as dom]
             [c2.event :as event]
             [singult.core :as singult]
+            [shoreleave.remotes.http-rpc :as rpc]
             [goog.string :as gstring]))
 
 ;;;;;;;;;;;;;;;;;;
@@ -144,16 +145,32 @@
                                      (gstring/contains (dom/attr (.-target e) :class) "active"))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;
-;;Download button
+;; Analysis buttons
 (let [$btn (dom/select "#filter-btn")]
   (bind! $btn
-         (case (get @data/!analysis-status
-                    (get (first @core/!vcfs) :file-url))
-           :completed [:button#filter-btn.btn {:properties {:disabled true}} "Completed"]
-           :running   [:button#filter-btn.btn {:properties {:disabled true}} "Running..."]
-           nil        [:button#filter-btn.btn {:properties {:disabled false}} "Export subset"]))
+         (if (or (zero? (count @core/!vcfs))
+                 (zero? (count (merge @core/!filters @core/!cat-filters))))
+           [:button#filter-btn.btn {:properties {:disabled true}} "Filter subset"]
+           (case (get @data/!analysis-status
+                      (get (first @core/!vcfs) :file-url))
+             :completed [:button#filter-btn.btn {:properties {:disabled true}} "Completed"]
+             :running   [:button#filter-btn.btn {:properties {:disabled true}} "Running..."]
+             nil        [:button#filter-btn.btn {:properties {:disabled false}} "Filter subset"])))
 
   (event/on-raw $btn :click
                 (fn [_]
                   (data/filter-analysis (get (first @core/!vcfs) :file-url)
                                         (merge @core/!filters @core/!cat-filters)))))
+
+(let [$btn (dom/select "#clinvar-btn")]
+  (bind! $btn
+         (if (pos? (count @core/!vcfs))
+           [:button#clinvar-btn.btn {:properties {:disabled false}} "Display at ClinVar"]
+           [:button#clinvar-btn.btn {:properties {:disabled true}} "Display at ClinVar"]))
+  (event/on-raw $btn :click
+                (fn [_]
+                  (let [file-url (:file-url (first @core/!vcfs))
+                        metrics (merge @core/!filters @core/!cat-filters)]
+                    (rpc/remote-callback "run/clinvar" [file-url metrics]
+                                         (fn [clinvar-url]
+                                           (pp clinvar-url)))))))

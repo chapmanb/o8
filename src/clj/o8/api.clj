@@ -12,7 +12,8 @@
             [bcbio.variation.api.file :as bc-file]
             [bcbio.variation.api.metrics :as bc-metrics]
             [bcbio.variation.remote.core :as remote]
-            [o8.dataset :as dataset]))
+            [o8.dataset :as dataset]
+            [o8.remote.clinvar :as clinvar]))
 
 (defremote ^{:remote-name :meta/username} get-username []
   (-> (current-authentication)
@@ -76,6 +77,12 @@
                      rclient)
         :runner
         deref)))
+
+(defremote ^{:remote-name :run/clinvar} run-clinvar
+  "Provide a redirect link after uploading current filtered information to ClinVar"
+  [file-url metrics]
+  (when-let [rclient (:client (current-authentication))]
+    (clinvar/submit-vcf file-url)))
 
 (defroutes api-routes
   (GET "/vcf" req
