@@ -75,16 +75,18 @@
             (when (= :category (get-in m [:x-scale :type]))
               (histogram/draw-histogram! @core/!vcfs @core/!metric))
             (histogram/draw-mini-hists!)
-            (publish! {:count-updated (.value (get-in (first @core/!vcfs) [:cf :all]))}))
+            (publish! {:count-updated (map #(.value (get-in % [:cf :all])) @core/!vcfs)}))
 
-(subscribe! {:count-updated x}
+(subscribe! {:count-updated xs}
             (singult/merge! (dom/select "#filter-summary")
                             [:table.table.table-condensed#filter-summary
                              [:tbody
                               (concat
                                [[:tr
-                                 [:td [:span#count-pad]]
-                                 [:td [:span#count (if x (str x " variants") "")]]]]
+                                 (cons
+                                  [:td [:span#count-pad]]
+                                  (for [x xs]
+                                    [:td [:span#count (if x (str x " variants") "")]]))]]
                                (for [[m-id extent] @core/!filters :when extent]
                                  [:tr
                                   [:td m-id]

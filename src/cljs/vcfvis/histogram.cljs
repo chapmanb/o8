@@ -149,10 +149,10 @@
    (if (seq vcfs)
      (do
        (draw-histogram! vcfs metric)
-       (publish! {:count-updated (.value (get-in (first vcfs) [:cf :all]))})
+       (publish! {:count-updated (map #(.value (get-in % [:cf :all])) vcfs)})
        (draw-mini-hists!))
      (do
        (reset! core/!filters {})
        (reset! core/!cat-filters {})
-       (publish! {:count-updated nil})))))
+       (publish! {:count-updated []})))))
 
