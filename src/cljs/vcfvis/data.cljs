@@ -4,7 +4,8 @@
                [dubstep.macros :only [subscribe!]])
   (:use [c2.util :only [clj->js]]
         [cljs.reader :only [read-string]])
-  (:require [vcfvis.core :as core]
+  (:require [goog.Timer :as timer]
+            [vcfvis.core :as core]
             [vcfvis.ui :as ui]
             [shoreleave.remotes.http-rpc :as rpc]
             [c2.scale :as scale]
@@ -118,3 +119,28 @@
   (rpc/remote-callback "run/filter" [file-url metrics]
                        (fn [res]
                          (update-status! file-url :completed))))
+
+;; ## Export to ClinVar
+
+(def !clinvar-status
+  "Status of a ClinVar submission keyed to filename."
+  (atom {}))
+
+(defn check-clinvar-submission
+  "Callback to monitor submission to ClinVar, making remote URL available when ready."
+  [file-url clinvar-id]
+  (rpc/remote-callback "status/clinvar" [clinvar-id]
+                       (fn [clinvar-url]
+                         (if (nil? clinvar-url)
+                           (timer/callOnce (fn [] (check-clinvar-submission file-url clinvar-id))
+                                           2000)
+                           (swap! !clinvar-status assoc file-url {:status :ready
+                                                                  :url clinvar-url})))))
+
+(defn submit-to-clinvar
+  "Submit the current file, post-filtering, to ClinVar."
+  [file-url metrics]
+  (swap! !clinvar-status assoc file-url {:status :send})
+  (rpc/remote-callback "run/clinvar" [file-url metrics]
+                       (fn [clinvar-id]
+                         (check-clinvar-submission file-url clinvar-id))))

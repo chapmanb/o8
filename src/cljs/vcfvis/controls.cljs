@@ -164,13 +164,20 @@
 
 (let [$btn (dom/select "#clinvar-btn")]
   (bind! $btn
-         (if (pos? (count @core/!vcfs))
-           [:button#clinvar-btn.btn {:properties {:disabled false}} "Display at ClinVar"]
-           [:button#clinvar-btn.btn {:properties {:disabled true}} "Display at ClinVar"]))
+         (let [btntxt "Export to ClinVar"
+               btntxt-p "Sending to ClinVar"
+               btntxt-l "View at ClinVar"]
+           (if-let [cur-vcf (:file-url (first @core/!vcfs))]
+             (let [cvstatus (get @data/!clinvar-status cur-vcf)]
+               (case (:status cvstatus)
+                 :send  [:button#clinvar-btn.btn {:properties {:disabled true}} btntxt-p]
+                 :ready [:button#clinvar-btn.btn.btn-success
+                         {:href (:url cvstatus) :properties {:disabled false}} btntxt-l]
+                 nil    [:button#clinvar-btn.btn {:properties {:disabled false}} btntxt]))
+             [:button#clinvar-btn.btn {:properties {:disabled true}} btntxt])))
   (event/on-raw $btn :click
                 (fn [_]
-                  (let [file-url (:file-url (first @core/!vcfs))
-                        metrics (merge @core/!filters @core/!cat-filters)]
-                    (rpc/remote-callback "run/clinvar" [file-url metrics]
-                                         (fn [clinvar-url]
-                                           (pp clinvar-url)))))))
+                  (if-let [clinvar-url (dom/attr $btn :href)]
+                    (.open js/window clinvar-url)
+                    (data/submit-to-clinvar (:file-url (first @core/!vcfs))
+                                            (merge @core/!filters @core/!cat-filters))))))

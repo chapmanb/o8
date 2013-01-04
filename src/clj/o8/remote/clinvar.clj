@@ -40,3 +40,21 @@
               (not (.contains (:body (client/get result-url)) "variation-reporter-running-page")))
         result-url
         (do (Thread/sleep 3000) (recur))))))
+
+(def ^{:doc "Cache of VCFs to ClinVar URLs"
+       :private true}
+  clinvar-urls (atom {}))
+
+(defn async-submit-vcf
+  "Submit a VCF file to ClinVar, providing a callback to get the ClinVar submitted URL."
+  [file-future rclient]
+  (let [clinvar-id (java.util.UUID/randomUUID)]
+    (future
+      (swap! clinvar-urls assoc [clinvar-id (select-keys rclient [:type :username])]
+             (submit-vcf @file-future)))
+    clinvar-id))
+
+(defn submit-status
+  "Check for ClinVar submission processing, returning URL if ready."
+  [clinvar-id rclient]
+  (get @clinvar-urls [clinvar-id (select-keys rclient [:type :username])]))

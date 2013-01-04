@@ -82,7 +82,15 @@
   "Provide a redirect link after uploading current filtered information to ClinVar"
   [file-url metrics]
   (when-let [rclient (:client (current-authentication))]
-    (clinvar/submit-vcf file-url)))
+    (let [filter-run (do-analysis :filter {:filename file-url :metrics metrics
+                                           :exponse-fn (expose-dataset (current-request))}
+                                  rclient)]
+      (clinvar/async-submit-vcf (:runner filter-run) rclient))))
+
+(defremote ^{:remote-name :status/clinvar} clinvar-status
+  [clinvar-id]
+  (when-let [rclient (:client (current-authentication))]
+    (clinvar/submit-status clinvar-id rclient)))
 
 (defroutes api-routes
   (GET "/vcf" req
