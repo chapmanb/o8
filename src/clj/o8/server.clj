@@ -36,6 +36,7 @@
                                                (get (:work-info session) runid)))
            (content-type "text/plain")))
 
+  (route/resources "/webjars" {:root "META-INF/resources/webjars"})
   (route/files "/" {:root "public" :allow-symlinks? true})
   (route/not-found "Not found"))
 

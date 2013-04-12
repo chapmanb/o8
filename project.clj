@@ -1,4 +1,4 @@
-(defproject com.keminglabs/vcf "0.0.1-SNAPSHOT"
+(defproject com.keminglabs/o8 "0.0.1-SNAPSHOT"
   :description "Genetic variant visualization and analysis tool"
   :license {:name "MIT" :url "http://www.opensource.org/licenses/mit-license.html"}
   :dependencies [[org.clojure/clojure "1.4.0"]
@@ -23,6 +23,11 @@
 
                  [clj-http "0.6.3"]
                  [org.clojure/data.zip "0.1.1"]
+
+                 [org.webjars/jquery "1.9.1"]
+                 [org.webjars/jquery-ui "1.10.2"]
+                 [org.webjars/bootstrap "2.3.1"]
+                 [org.webjars/chosen "0.9.12"]
 
                  [bcbio.variation "0.0.7-SNAPSHOT"]]
 
