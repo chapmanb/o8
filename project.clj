@@ -7,7 +7,7 @@
                  [com.keminglabs/c2 "0.2.1"
                   :exclusions [com.keminglabs/singult]]
                  [com.keminglabs/singult "0.1.5-SNAPSHOT"]
-                 [com.keminglabs/chosen "0.1.7-SNAPSHOT"]
+                 [com.keminglabs/chosen "0.1.7"]
                  [com.keminglabs/dubstep "0.1.2-SNAPSHOT"]
 
                  [compojure "1.1.3"]
@@ -34,7 +34,7 @@
   :jvm-opts ["-Dorg.eclipse.jetty.util.log.class=org.eclipse.jetty.util.log.StdErrLog"
              "-Xms2g" "-Xmx4g"]
   :main o8.main
-  
+
   :profiles {:dev {:dependencies [[midje "1.4.0"]
                                   [clj-http "0.5.0"]]}
              :cljs {:dependencies [[bcbio.variation "0.0.7-SNAPSHOT"
@@ -46,7 +46,7 @@
   :test-paths ["test/clj"]
 
   :plugins [[lein-cljsbuild "0.2.7"]
-            [lein-ring "0.7.5"]]
+            [lein-ring "0.8.3"]]
 
   :ring {:handler o8.server/app
          :init o8.main/devel-set-config!}
