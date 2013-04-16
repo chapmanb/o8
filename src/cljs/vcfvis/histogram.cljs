@@ -23,7 +23,7 @@
 
 (defn svg-scale [coordinates]
   (if (number? coordinates)
-    (str "scale(" (float coordinates) ")")
+    (str "scale(" coordinates ")")
     (let [[x y] (svg/->xy coordinates)]
       (str "scale(" x "," y ")"))))
 

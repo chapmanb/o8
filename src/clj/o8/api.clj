@@ -2,7 +2,7 @@
   "Expose variant data retrieval and processing to client calls."
   (:use compojure.core
         [cemerick.friend :only [current-authentication]]
-        [cemerick.shoreleave.rpc :only [defremote current-request]]
+        [shoreleave.middleware.rpc :only [defremote current-request]]
         [bcbio.variation.api.run :only [do-analysis]]
         [bcbio.variation.api.shared :only [web-config]]
         [cheshire.core :only [generate-string]])

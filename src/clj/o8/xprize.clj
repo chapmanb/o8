@@ -3,7 +3,7 @@
   (:use [clojure.java.io]
         [compojure.core]
         [ring.util.response]
-        [cemerick.shoreleave.rpc :only [defremote current-request]]
+        [shoreleave.middleware.rpc :only [defremote current-request]]
         [bcbio.variation.config :only [get-log-status]]
         [bcbio.variation.api.shared :only [web-config]])
   (:require [cemerick.friend :as friend]

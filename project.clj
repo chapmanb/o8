@@ -13,15 +13,15 @@
                  [org.clojure/core.match "0.2.0-alpha11"
                   :exclusions [org.clojure/core.logic org.clojure/clojure]]
 
-                 [compojure "1.1.3"]
-                 [ring/ring-core "1.1.6"]
-                 [ring/ring-jetty-adapter "1.1.6"]
-                 [com.cemerick/friend "0.1.2"]
+                 [compojure "1.1.5"]
+                 [ring/ring-core "1.2.0-beta2"]
+                 [ring/ring-jetty-adapter "1.2.0-beta2"]
+                 [com.cemerick/friend "0.1.5"]
                  [cheshire "4.0.1"]
-                 [shoreleave/shoreleave-remote "0.2.2"]
-                 [com.cemerick/shoreleave-remote-ring "0.0.3-SNAPSHOT"]
+                 [shoreleave/shoreleave-remote "0.3.0"]
+                 [shoreleave/shoreleave-remote-ring "0.3.1-SNAPSHOT"]
                  [ring-anti-forgery "0.2.1" :exclusions [hiccup]]
-                 [hiccup "1.0.1"]
+                 [hiccup "1.0.3"]
                  [enlive "1.0.1" :exclusions [org.clojure/clojure]]
 
                  [clj-http "0.6.3"]

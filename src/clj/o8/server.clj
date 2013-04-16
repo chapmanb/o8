@@ -9,7 +9,7 @@
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
             [cemerick.friend :as friend]
-            [cemerick.shoreleave.rpc :as rpc]
+            [shoreleave.middleware.rpc :as rpc]
             [o8.api :as api]
             [o8.dataset :as dataset]
             [o8.pages :as pages]
