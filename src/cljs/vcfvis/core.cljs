@@ -2,7 +2,6 @@
   (:use-macros [c2.util :only [pp p interval]]
                [reflex.macros :only [computed-observable constrain!]]
                [dubstep.macros :only [publish! subscribe!]])
-  (:use [c2.util :only [clj->js]])
   (:require [clojure.set :as set]
             [reflex.core :as reflex]
             [dubstep.pubsub :as dubstep.pubsub]))

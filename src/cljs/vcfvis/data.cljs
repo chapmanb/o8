@@ -2,8 +2,7 @@
   (:use-macros [c2.util :only [pp p]]
                [reflex.macros :only [constrain!]]
                [dubstep.macros :only [subscribe!]])
-  (:use [c2.util :only [clj->js]]
-        [cljs.reader :only [read-string]])
+  (:use [cljs.reader :only [read-string]])
   (:require [goog.Timer :as timer]
             [vcfvis.core :as core]
             [vcfvis.ui :as ui]

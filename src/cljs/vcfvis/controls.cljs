@@ -3,8 +3,7 @@
                [reflex.macros :only [constrain!]]
                [dubstep.macros :only [publish! subscribe!]])
   (:use [chosen.core :only [ichooseu! options]]
-        [c2.core :only [unify]]
-        [c2.util :only [clj->js]])
+        [c2.core :only [unify]])
   (:require [clojure.set :as set]
             [clojure.string :as string]
             [vcfvis.core :as core]

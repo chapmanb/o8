@@ -21,6 +21,12 @@
 (def inter-hist-margin ui/inter-hist-margin)
 (def axis-height ui/axis-height)
 
+(defn svg-scale [coordinates]
+  (if (number? coordinates)
+    (str "scale(" (float coordinates) ")")
+    (let [[x y] (svg/->xy coordinates)]
+      (str "scale(" x "," y ")"))))
+
 (defn hist-g* [vcf metric & {:keys [height width bars?]
                              :or {bars? true}}]
   (let [{metric-id :id scale-x :scale-x} metric
@@ -40,8 +46,8 @@
      [:text.message {:x (/ width 2) :y (/ height 2)}
       (when no-data?
         "No available data; try clearing filters on other dimensions.")]
-     [:g.data-frame {:transform (str (svg/translate [0 height])
-                                     (svg/scale [1 -1]))}
+     [:g.data-frame {:transform (str (svg/translate {:x 0 :y height})
+                                     (svg-scale {:x 1 :y -1}))}
       [:g.distribution
        (when-not no-data?
          (if bars?
@@ -80,7 +86,7 @@
                                                     (* (dec n) inter-hist-margin))}
 
                       (for [[vcf idx] (map vector vcfs (range))]
-                        [:g {:transform (svg/translate [0 (* idx (+ mini-height inter-hist-margin))])}
+                        [:g {:transform (svg/translate {:x 0 :y (* idx (+ mini-height inter-hist-margin))})}
                          (hist-g* vcf m
                                   :height mini-height
                                   :width mini-width
@@ -105,15 +111,15 @@
                       
                       
                       [:svg.histogram {:width (+ width (* 2 margin)) :height (+ height (* (dec n) inter-hist-margin))}
-                       [:g.hist-container {:transform (svg/translate [margin 0])}
+                       [:g.hist-container {:transform (svg/translate {:x margin :y 0})}
                         (for [[vcf idx] (map vector vcfs (range))]
-                          [:g {:transform (svg/translate [0 (* idx (+ hist-height inter-hist-margin))])}
+                          [:g {:transform (svg/translate {:x 0 :y (* idx (+ hist-height inter-hist-margin))})}
                            (hist-g* vcf metric :height hist-height :width width)])]]]
 
                      [:div#hist-axis
                       [:div.axis.abscissa
                        [:svg {:width (+ width (* 2 margin)) :height axis-height}
-                        [:g {:transform (svg/translate [margin 2])}
+                        [:g {:transform (svg/translate {:x margin :y 2})}
                          (svg/axis x (:ticks x)
                                    :orientation :bottom
                                    :formatter (partial gstr/format

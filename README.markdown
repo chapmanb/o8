@@ -27,9 +27,7 @@ To run the server:
 and your site will be available at 'http://localhost:8080`.
 
 To enable functional annotation and querying of biological metrics, install
-[gemini][10] and [VEP][11] on the system as well. [CloudBioLinux][12] contains
-build instructions to automatically install these tools along with other
-biological software.
+[gemini][10] on the system as well.
 
 ## Development
 

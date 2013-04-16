@@ -64,10 +64,10 @@
                                                        (scale-x x1))
                              :height height}]
               [:g.resize.w
-               [:path {:transform (svg/translate [(scale-x x1) 0])
+               [:path {:transform (svg/translate {:x (scale-x x1) :y 0})
                        :d (resize-path-d (/ height 3) :west)}]]
               [:g.resize.e
-               [:path {:transform (svg/translate [(scale-x x2) 0])
+               [:path {:transform (svg/translate {:x (scale-x x2) :y 0})
                        :d (resize-path-d (/ height 3) :east)}]]]))
 
     ;;Mouse event handlers for creating a new selection
