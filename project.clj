@@ -4,7 +4,7 @@
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.clojure/tools.cli "0.2.1"]
 
-                 [com.keminglabs/c2 "0.2.2"
+                 [com.keminglabs/c2 "0.2.3-SNAPSHOT"
                   :exclusions [com.keminglabs/singult org.clojure/core.match]]
                  [com.keminglabs/singult "0.1.6"]
                  [com.keminglabs/chosen "0.1.7"]
@@ -19,7 +19,9 @@
                  [com.cemerick/friend "0.1.5"]
                  [cheshire "4.0.1"]
                  [shoreleave/shoreleave-remote "0.3.0"]
-                 [shoreleave/shoreleave-remote-ring "0.3.1-SNAPSHOT"]
+                 [shoreleave/shoreleave-remote-ring "0.3.0"]
+                 [lib-noir "0.5.0" :exclusions
+                  [org.clojure/clojure ring compojure]]
                  [ring-anti-forgery "0.2.1" :exclusions [hiccup]]
                  [hiccup "1.0.3"]
                  [enlive "1.0.1" :exclusions [org.clojure/clojure]]

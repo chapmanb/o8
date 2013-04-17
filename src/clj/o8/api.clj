@@ -2,13 +2,14 @@
   "Expose variant data retrieval and processing to client calls."
   (:use compojure.core
         [cemerick.friend :only [current-authentication]]
-        [shoreleave.middleware.rpc :only [defremote current-request]]
+        [shoreleave.middleware.rpc :only [defremote]]
         [bcbio.variation.api.run :only [do-analysis]]
         [bcbio.variation.api.shared :only [web-config]]
         [cheshire.core :only [generate-string]])
   (:require [clojure.string :as string]
             [compojure.handler :as handler]
             [compojure.route :as route]
+            [noir.request]
             [bcbio.variation.api.file :as bc-file]
             [bcbio.variation.api.metrics :as bc-metrics]
             [bcbio.variation.remote.core :as remote]
@@ -73,7 +74,7 @@
   [file-url metrics]
   (when-let [rclient (:client (current-authentication))]
     (-> (do-analysis :filter {:filename file-url :metrics metrics
-                              :expose-fn (expose-dataset (current-request))}
+                              :expose-fn (expose-dataset noir.request/*request*)}
                      rclient)
         :runner
         deref)))
@@ -83,7 +84,7 @@
   [file-url metrics]
   (when-let [rclient (:client (current-authentication))]
     (let [filter-run (do-analysis :filter {:filename file-url :metrics metrics
-                                           :exponse-fn (expose-dataset (current-request))}
+                                           :exponse-fn (expose-dataset noir.request/*request*)}
                                   rclient)]
       (clinvar/async-submit-vcf (:runner filter-run) rclient))))
 

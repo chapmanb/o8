@@ -9,6 +9,7 @@
   (:require [compojure.handler :as handler]
             [compojure.route :as route]
             [cemerick.friend :as friend]
+            [noir.util.middleware :as noir-middleware]
             [shoreleave.middleware.rpc :as rpc]
             [o8.api :as api]
             [o8.dataset :as dataset]
@@ -45,6 +46,7 @@
       wrap-file-info
       wrap-anti-forgery
       rpc/wrap-rpc
+      noir-middleware/wrap-request-map
       (friend/authenticate {:credential-fn bio-credential-fn
                             :workflows [(bio-remote-workflow)]})
       wrap-session

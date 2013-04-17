@@ -3,13 +3,14 @@
   (:use [clojure.java.io]
         [compojure.core]
         [ring.util.response]
-        [shoreleave.middleware.rpc :only [defremote current-request]]
+        [shoreleave.middleware.rpc :only [defremote]]
         [bcbio.variation.config :only [get-log-status]]
         [bcbio.variation.api.shared :only [web-config]])
   (:require [cemerick.friend :as friend]
             [fs.core :as fs]
             [hiccup.core :as hiccup]
             [net.cgrand.enlive-html :as html]
+            [noir.request]
             [bcbio.variation.api.run :as run]
             [bcbio.variation.web.db :as db]
             [o8.api :as api]
@@ -17,7 +18,7 @@
 
 (defn- get-work-info
   [run-id]
-  (-> (current-request)
+  (-> noir.request/*request*
       :session
       :work-info
       (get run-id)))
